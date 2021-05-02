@@ -1,0 +1,32 @@
+.nav{
+    margin-left: auto;
+}
+
+.mr-5{
+    margin-right: 50px;
+}
+.navcolour{
+    color: black;
+    font-family: 'georgia';
+}
+
+.adminbtn{
+    display: block;
+    width: 100%;
+    padding: 0px 20px;
+    background: none;
+    border-radius:25px;
+    border: none;
+    border: 2px solid gray;
+    text-align: center;
+    margin-top: 6px;
+}
+.adminbtn:hover{
+    background-color: rgb(80, 57, 57);
+    box-shadow: 1px 1px 4px 1px rgb(221, 131, 47);
+
+}
+
+.h-2{
+    font-family: 'georgia';
+}
