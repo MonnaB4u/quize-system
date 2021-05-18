@@ -22,7 +22,7 @@ class Play extends Component {
         //     fetch('http://localhost:5000/quizeAll')
         //         .then(res => res.json())
         //         .then(data => {
-        //             setData(allData)
+        //             setData(data)
         //         })
         // }, [])
 
