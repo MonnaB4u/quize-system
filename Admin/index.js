@@ -22,14 +22,14 @@ client.connect(err => {
 
     const onlineQuozeDbcollection = client.db("onlineQuozeDb").collection("AllQuestion");
     const FeedBack = client.db("onlineQuozeDb").collection("FeedBack");
-
+    
     console.log("Db Connected")
 
 ////////add all Quize
 
 app.post('/addallquiz',(req,res)=>{
     const quize=req.body;
-    onlineQuozeDbcollection.insertMany(quize)
+    onlineQuozeDbcollection.insertOne(quize)
     .then(result =>{
         console.log(result.insertedCount);
         res.send(result.insertedCount)
