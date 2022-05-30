@@ -1,5 +1,5 @@
 #home {
-    background-image: url('../../assets/img/background.jpg');
+    background-image: url('https://res.cloudinary.com/jerrick/image/upload/f_jpg,fl_progressive,q_auto,w_1024/60e8091ac4e6b1001d1f7243.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -8,7 +8,7 @@
     width: 100vw;
 
     section {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(12, 192, 216, 0.7);
         border-radius: 5px;
         padding-left: $md;
         padding-right: $md;
@@ -62,7 +62,7 @@
         background-color: darken($red, 10%);
         box-shadow: $shadow;
     }
-    
+
     #signup-button {
         background-color: $blue;
     }

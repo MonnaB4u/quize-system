@@ -9,15 +9,16 @@ import isEmpty from '../../utils/is-empty';
 import correctNotification from '../../assets/audio/correct-answer.mp3';
 import wrongNotification from '../../assets/audio/wrong-answer.mp3';
 import buttonSound from '../../assets/audio/button-sound.mp3';
+import NavBar from '../MainHome/NavBar/NavBar';
 
 
 
 class Play extends Component {
-   
+
     constructor (props) {
         // const allData=data
         // const [questions, setData] = useState([])
-    
+
         // useEffect(() => {
         //     fetch('http://localhost:5000/quizeAll')
         //         .then(res => res.json())
@@ -26,11 +27,11 @@ class Play extends Component {
         //         })
         // }, [])
 
-        
+
         super(props);
 
-       
-       
+
+
         this.state = {
             questions,
             currentQuestion: {},
@@ -52,9 +53,9 @@ class Play extends Component {
             time: {}
         };
         this.interval = null;
-        this.correctSound = React.createRef();
-        this.wrongSound = React.createRef();
-        this.buttonSound = React.createRef();
+        // this.correctSound = React.createRef();
+        // this.wrongSound = React.createRef();
+        // this.buttonSound = React.createRef();
     }
 
     componentDidMount () {
@@ -68,7 +69,7 @@ class Play extends Component {
     }
 
     displayQuestions = (questions = this.state.questions, currentQuestion, nextQuestion, previousQuestion) => {
-        let { currentQuestionIndex } = this.state;   
+        let { currentQuestionIndex } = this.state;
         if (!isEmpty(this.state.questions)) {
             questions = this.state.questions;
             currentQuestion = questions[currentQuestionIndex];
@@ -86,18 +87,18 @@ class Play extends Component {
                 this.showOptions();
                 this.handleDisableButton();
             });
-        }     
+        }
     };
 
     handleOptionClick = (e) => {
         if (e.target.innerHTML.toLowerCase() === this.state.answer.toLowerCase()) {
             this.correctTimeout = setTimeout(() => {
-                this.correctSound.current.play();
+                // this.correctSound.current.play();
             }, 500);
             this.correctAnswer();
         } else {
             this.wrongTimeout = setTimeout(() => {
-                this.wrongSound.current.play();
+                // this.wrongSound.current.play();
             }, 500);
             this.wrongAnswer();
         }
@@ -115,7 +116,7 @@ class Play extends Component {
     };
 
     handlePreviousButtonClick = () => {
-        this.playButtonSound();
+        // this.playButtonSound();
         if (this.state.previousQuestion !== undefined) {
             this.setState(prevState => ({
                 currentQuestionIndex: prevState.currentQuestionIndex - 1
@@ -126,7 +127,7 @@ class Play extends Component {
     };
 
     handleQuitButtonClick = () => {
-        this.playButtonSound();
+        // this.playButtonSound();
         if (window.confirm('Are you sure you want to quit?')) {
             this.props.history.push('/');
         }
@@ -149,11 +150,11 @@ class Play extends Component {
             default:
                 break;
         }
-        
+
     };
 
     playButtonSound = () => {
-        this.buttonSound.current.play();
+        // this.buttonSound.current.play();
     };
 
     correctAnswer = () => {
@@ -167,7 +168,7 @@ class Play extends Component {
             correctAnswers: prevState.correctAnswers + 1,
             currentQuestionIndex: prevState.currentQuestionIndex + 1,
             numberOfAnsweredQuestions: prevState.numberOfAnsweredQuestions + 1
-        }), () => {            
+        }), () => {
             if (this.state.nextQuestion === undefined) {
                 this.endGame();
             } else {
@@ -353,51 +354,52 @@ class Play extends Component {
     }
 
     render () {
-        const { 
-            currentQuestion, 
-            currentQuestionIndex, 
-            fiftyFifty, 
-            hints, 
+        const {
+            currentQuestion,
+            currentQuestionIndex,
+            fiftyFifty,
+            hints,
             numberOfQuestions,
-            time 
+            time
         } = this.state;
 
-         
-       
+
+
         return (
             <Fragment>
-                <Helmet><title>Quiz Page</title></Helmet>
+                <NavBar></NavBar>
+                <Helmet><title className="text-primary">Quiz Page</title></Helmet>
                 <Fragment>
                     <audio ref={this.correctSound} src={correctNotification}></audio>
                     <audio ref={this.wrongSound} src={wrongNotification}></audio>
                     <audio ref={this.buttonSound} src={buttonSound}></audio>
                 </Fragment>
                 <div className="questions">
-                    <h2>Quiz Mode</h2>
+                    <h2 className="text-white">Quiz Mode</h2>
                     <div className="lifeline-container">
                         <p>
-                            <span onClick={this.handleFiftyFifty} className="mdi mdi-set-center mdi-24px lifeline-icon">
-                                <span className="lifeline">{fiftyFifty}</span>
+                            <span onClick={this.handleFiftyFifty} className="text-white mdi mdi-set-center mdi-24px lifeline-icon">
+                                <span className="lifeline text-white">{fiftyFifty}</span>
                             </span>
                         </p>
                         <p>
-                            <span onClick={this.handleHints} className="mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon">
-                                <span className="lifeline">{hints}</span>
+                            <span onClick={this.handleHints} className="text-white mdi mdi-lightbulb-on-outline mdi-24px lifeline-icon">
+                                <span className="lifeline text-white">{hints}</span>
                             </span>
                         </p>
                     </div>
-                    <div className="timer-container">
+                    <div className="timer-container text-white">
                         <p>
                             <span className="left" style={{ float: 'left' }}>{currentQuestionIndex + 1} of {numberOfQuestions}</span>
-                            <span className={classnames('right valid', {
+                            <span className={classnames('right valid text-white text-white', {
                                 'warning': time.distance <= 120000,
                                 'invalid': time.distance < 30000
                             })}>
                                 {time.minutes}:{time.seconds}
-                            <span  className="mdi mdi-clock-outline mdi-24px"></span></span>
+                            <span  className="mdi mdi-clock-outline text-white mdi-24px"></span></span>
                         </p>
                     </div>
-                    <h5>{currentQuestion.question}</h5>
+                    <h5 className="text-white text-white" >{currentQuestion.question}</h5>
                     <div className="options-container">
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionA}</p>
                         <p onClick={this.handleOptionClick} className="option">{currentQuestion.optionB}</p>
@@ -408,15 +410,15 @@ class Play extends Component {
                     </div>
 
                     <div className="button-container">
-                        <button 
+                        <button
                             className={classnames('', {'disable': this.state.previousButtonDisabled})}
-                            id="previous-button" 
+                            id="previous-button"
                             onClick={this.handleButtonClick}>
                             Previous
                         </button>
-                        <button 
+                        <button
                             className={classnames('', {'disable': this.state.nextButtonDisabled})}
-                            id="next-button" 
+                            id="next-button"
                             onClick={this.handleButtonClick}>
                                 Next
                             </button>
